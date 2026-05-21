@@ -410,16 +410,24 @@ tasks.register("setupAndroidSdk") {
 tasks.register("test") {
     group = "verification"
     description =
-        "Runs the host-portable test suite (macOS + JS + WasmJS + Android unit). " +
-        "Non-host native targets (mingwX64, linuxX64) only run on their own host."
+        "Runs the host-portable test suite on this macOS host: macOS, iOS/tvOS/" +
+        "watchOS simulators, JVM, JS (Node + browser), Wasm-JS (Node + browser), " +
+        "Wasm-WASI Node, and Android unit tests. Targets that require a non-macOS " +
+        "host (mingwX64, linuxX64, linuxArm64, real iOS/tvOS/watchOS devices) only " +
+        "run from their own host's CI workflow."
 
     val defaultTestTasks = listOf(
         "macosArm64Test",
+        "iosSimulatorArm64Test",
+        "tvosSimulatorArm64Test",
+        "watchosSimulatorArm64Test",
         "jvmTest",
         "jsNodeTest",
+        "jsBrowserTest",
         "wasmJsNodeTest",
-        "compileAndroidMain",
-        "assembleUnitTest",
+        "wasmJsBrowserTest",
+        "wasmWasiNodeTest",
+        "testAndroidHostTest",
     )
 
     dependsOn(defaultTestTasks.mapNotNull { taskName -> tasks.findByName(taskName) })
@@ -479,6 +487,33 @@ val fullTargetBuildTasks = listOf(
 
 tasks.named("build") {
     dependsOn(fullTargetBuildTasks)
+}
+
+// Empty placeholder files exist under every source set so that no Gradle
+// task in the build graph reports NO-SOURCE; the markers are not part of
+// the published API surface and must not be bundled into the JAR / KLIB /
+// AAR artifacts consumers download. Filter them out of every Jar-shaped
+// archive task and out of AAR packaging.
+val excludedMarkerPatterns = listOf(
+    "**/.source-set-marker-*",
+    "**/libchardetng_marker.so",
+    "**/libchardetng_test_marker.so",
+)
+
+tasks.withType<Jar>().configureEach {
+    excludedMarkerPatterns.forEach { exclude(it) }
+}
+
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        variant.packaging.jniLibs.excludes.addAll(
+            "**/libchardetng_marker.so",
+            "**/libchardetng_test_marker.so",
+        )
+        variant.packaging.resources.excludes.addAll(
+            ".source-set-marker-*",
+        )
+    }
 }
 
 // The generated Wasm-WASI Node test runner cannot see the filesystem unless
