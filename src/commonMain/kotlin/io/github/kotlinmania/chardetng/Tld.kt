@@ -1,4 +1,4 @@
-// port-lint: source src/tld.rs
+// port-lint: source tld.rs
 package io.github.kotlinmania.chardetng
 
 /* Any copyright is dedicated to the Public Domain.
