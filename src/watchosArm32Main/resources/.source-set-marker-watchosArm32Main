@@ -1,0 +1,2 @@
+# Empty marker so the watchosArm32Main resources task has input instead of NO-SOURCE.
+# Excluded from published JAR/KLIB/AAR by build.gradle.kts.
