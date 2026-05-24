@@ -199,10 +199,18 @@ kotlin {
         binaries.framework { baseName = "Chardetng"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "Chardetng"; xcf.add(this) }
+        binaries.framework {
+            baseName = "Chardetng"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
-        binaries.framework { baseName = "Chardetng"; xcf.add(this) }
+        binaries.framework {
+            baseName = "Chardetng"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     tvosArm64 {
