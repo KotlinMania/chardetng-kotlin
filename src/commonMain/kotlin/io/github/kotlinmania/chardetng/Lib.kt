@@ -34,3 +34,5 @@ package io.github.kotlinmania.chardetng
 // charset index constants, ASCII_DIGIT, computeIndex), and on the
 // multithreading-only items gated behind the upstream multithreading Cargo
 // feature (rayon parallel iterators and the ArrayVec stack vector).
+
+internal const val CHARDETNG_LIB = "chardetng.Lib"
