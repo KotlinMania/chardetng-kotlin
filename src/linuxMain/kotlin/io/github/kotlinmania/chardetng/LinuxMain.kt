@@ -4,4 +4,5 @@
 // only a package directive so no symbol is added to the published .klib's
 // linkdata.
 package io.github.kotlinmania.chardetng
+
 internal const val LinuxMain_MARKER = "chardetng.LinuxMain"
