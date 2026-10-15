@@ -214,10 +214,12 @@ internal class NonLatinCasedCandidate(
                     NonLatinCaseState.Upper,
                     NonLatinCaseState.Lower,
                     -> {}
+
                     NonLatinCaseState.UpperLower -> {
                         // Intentionally applied only once per word.
                         score += NON_LATIN_CAPITALIZATION_BONUS
                     }
+
                     NonLatinCaseState.AllCaps -> {
                         // Intentionally applied only once per word.
                         if (data === SINGLE_BYTE_DATA[KOI8_U_INDEX]) {
@@ -225,6 +227,7 @@ internal class NonLatinCasedCandidate(
                             score += NON_LATIN_ALL_CAPS_PENALTY
                         }
                     }
+
                     NonLatinCaseState.Mix -> {
                         // Per letter
                         score += NON_LATIN_MIXED_CASE_PENALTY * currentWordLen
@@ -237,13 +240,16 @@ internal class NonLatinCasedCandidate(
                     NonLatinCaseState.Space -> {
                         caseState = NonLatinCaseState.Lower
                     }
+
                     NonLatinCaseState.Upper -> {
                         caseState = NonLatinCaseState.UpperLower
                     }
+
                     NonLatinCaseState.Lower,
                     NonLatinCaseState.UpperLower,
                     NonLatinCaseState.Mix,
                     -> {}
+
                     NonLatinCaseState.AllCaps -> {
                         caseState = NonLatinCaseState.Mix
                     }
@@ -254,14 +260,17 @@ internal class NonLatinCasedCandidate(
                     NonLatinCaseState.Space -> {
                         caseState = NonLatinCaseState.Upper
                     }
+
                     NonLatinCaseState.Upper -> {
                         caseState = NonLatinCaseState.AllCaps
                     }
+
                     NonLatinCaseState.Lower,
                     NonLatinCaseState.UpperLower,
                     -> {
                         caseState = NonLatinCaseState.Mix
                     }
+
                     NonLatinCaseState.AllCaps,
                     NonLatinCaseState.Mix,
                     -> {}
@@ -363,11 +372,13 @@ internal class LatinCandidate(
                     LatinCaseState.Space -> {
                         caseState = LatinCaseState.Upper
                     }
+
                     LatinCaseState.Upper,
                     LatinCaseState.AllCaps,
                     -> {
                         caseState = LatinCaseState.AllCaps
                     }
+
                     LatinCaseState.Lower -> {
                         if (!asciiPair) {
                             score += IMPLAUSIBLE_LATIN_CASE_TRANSITION_PENALTY
@@ -416,6 +427,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Space
                         }
                     }
+
                     OrdinalState.Space -> {
                         if (caselessClass == 0) {
                             // pass
@@ -439,6 +451,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.OrdinalExpectingSpace -> {
                         if (caselessClass == 0) {
                             score += ORDINAL_BONUS
@@ -447,6 +460,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.OrdinalExpectingSpaceUndoImplausibility -> {
                         if (caselessClass == 0) {
                             score += ORDINAL_BONUS - IMPLAUSIBILITY_PENALTY
@@ -455,6 +469,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.OrdinalExpectingSpaceOrDigit -> {
                         if (caselessClass == 0) {
                             score += ORDINAL_BONUS
@@ -466,6 +481,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.OrdinalExpectingSpaceOrDigitUndoImplausibily -> {
                         if (caselessClass == 0) {
                             score += ORDINAL_BONUS - IMPLAUSIBILITY_PENALTY
@@ -477,6 +493,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.UpperN -> {
                         if (b == 0xAA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpaceUndoImplausibility
@@ -490,6 +507,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.LowerN -> {
                         if (b == 0xBA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpaceOrDigitUndoImplausibily
@@ -501,6 +519,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.FeminineAbbreviationStartLetter -> {
                         if (b == 0xAA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpaceUndoImplausibility
@@ -510,6 +529,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.Digit -> {
                         if (b == 0xAA || b == 0xBA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpace
@@ -521,6 +541,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.Roman -> {
                         if (b == 0xAA || b == 0xBA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpaceUndoImplausibility
@@ -532,6 +553,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.PeriodAfterN -> {
                         if (b == 0xBA) {
                             ordinalState = OrdinalState.OrdinalExpectingSpaceOrDigit
@@ -541,6 +563,7 @@ internal class LatinCandidate(
                             ordinalState = OrdinalState.Other
                         }
                     }
+
                     OrdinalState.Copyright -> {
                         if (caselessClass == 0) {
                             score += COPYRIGHT_BONUS
@@ -598,11 +621,13 @@ internal class ArabicFrenchCandidate(
                     LatinCaseState.Space -> {
                         caseState = LatinCaseState.Upper
                     }
+
                     LatinCaseState.Upper,
                     LatinCaseState.AllCaps,
                     -> {
                         caseState = LatinCaseState.AllCaps
                     }
+
                     LatinCaseState.Lower -> {
                         if (!asciiPair) {
                             score += IMPLAUSIBLE_LATIN_CASE_TRANSITION_PENALTY
@@ -918,8 +943,14 @@ internal class GbkCandidate(
                                 score += GBK_SCORE_PER_LEVEL_1
                                 score += cjkExtraScore(u, DETECTOR_DATA.frequentSimplified)
                             }
-                            in 0xD8..0xFE -> score += GBK_SCORE_PER_LEVEL_2
-                            else -> score += GBK_SCORE_PER_NON_EUC
+
+                            in 0xD8..0xFE -> {
+                                score += GBK_SCORE_PER_LEVEL_2
+                            }
+
+                            else -> {
+                                score += GBK_SCORE_PER_NON_EUC
+                            }
                         }
                     } else {
                         score += maybeSetAsPending(GBK_SCORE_PER_NON_EUC)
@@ -965,6 +996,7 @@ internal class GbkCandidate(
                             }
                             prev = LatinCj.Cj
                         }
+
                         else -> {
                             score += GBK_PUA_PENALTY
                             prev = LatinCj.Other
@@ -989,9 +1021,11 @@ internal class GbkCandidate(
                             }
                             score += CJ_PUNCTUATION
                         }
+
                         in 0..0x7F -> {
                             pendingScore = null
                         }
+
                         else -> {
                             val pending = pendingScore
                             if (pending != null) {
@@ -1026,6 +1060,7 @@ internal class GbkCandidate(
             }
             when (result) {
                 is DecoderResult.InputEmpty -> {}
+
                 is DecoderResult.Malformed -> {
                     val malformedLen = result.length.toInt()
                     if ((prevByte == 0xA0 || prevByte == 0xFE || prevByte == 0xFD) &&
@@ -1051,7 +1086,10 @@ internal class GbkCandidate(
                         return null
                     }
                 }
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
             prevByte = b
         }
@@ -1059,8 +1097,14 @@ internal class GbkCandidate(
             val (result, _, _) = decoder.decodeToUtf16Raw(ByteArray(0), dst, true)
             when (result) {
                 is DecoderResult.InputEmpty -> {}
-                is DecoderResult.Malformed -> return null
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.Malformed -> {
+                    return null
+                }
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
         }
         return score
@@ -1197,13 +1241,16 @@ internal class ShiftJisCandidate(
                             }
                             score += CJ_PUNCTUATION
                         }
+
                         in 0..0x7F -> {
                             pendingScore = null
                         }
+
                         0x80 -> {
                             pendingScore = null
                             score += IMPLAUSIBILITY_PENALTY
                         }
+
                         else -> {
                             val pending = pendingScore
                             if (pending != null) {
@@ -1218,6 +1265,7 @@ internal class ShiftJisCandidate(
             }
             when (result) {
                 is DecoderResult.InputEmpty -> {}
+
                 is DecoderResult.Malformed -> {
                     val malformedLen = result.length.toInt()
                     if ((
@@ -1254,7 +1302,10 @@ internal class ShiftJisCandidate(
                         return null
                     }
                 }
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
             prevByte = b
         }
@@ -1262,8 +1313,14 @@ internal class ShiftJisCandidate(
             val (result, _, _) = decoder.decodeToUtf16Raw(ByteArray(0), dst, true)
             when (result) {
                 is DecoderResult.InputEmpty -> {}
-                is DecoderResult.Malformed -> return null
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.Malformed -> {
+                    return null
+                }
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
         }
         return score
@@ -1331,6 +1388,7 @@ internal class EucJpCandidate(
                         0x3090, 0x3091, 0x30F0, 0x30F1 -> {
                             score += EUC_JP_SCORE_PER_NEAR_OBSOLETE_KANA
                         }
+
                         else -> {
                             score += EUC_JP_SCORE_PER_KANA
                         }
@@ -1357,7 +1415,9 @@ internal class EucJpCandidate(
                         0x3000, 0x3001, 0x3002, 0xFF08, 0xFF09 -> {
                             score += CJ_PUNCTUATION
                         }
+
                         in 0..0x7F -> {}
+
                         else -> {
                             score += CJK_OTHER
                         }
@@ -1367,6 +1427,7 @@ internal class EucJpCandidate(
             }
             when (result) {
                 is DecoderResult.InputEmpty -> {}
+
                 is DecoderResult.Malformed -> {
                     if (b in 0xA1..0xFE &&
                         prevByte in 0xA1..0xFE &&
@@ -1399,7 +1460,10 @@ internal class EucJpCandidate(
                         return null
                     }
                 }
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
             prevPrevByte = prevByte
             prevByte = b
@@ -1408,8 +1472,14 @@ internal class EucJpCandidate(
             val (result, _, _) = decoder.decodeToUtf16Raw(ByteArray(0), dst, true)
             when (result) {
                 is DecoderResult.InputEmpty -> {}
-                is DecoderResult.Malformed -> return null
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.Malformed -> {
+                    return null
+                }
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
         }
         return score
@@ -1458,6 +1528,7 @@ internal class Big5Candidate(
                         in 0xA4..0xC6 -> {
                             score += maybeSetAsPending(BIG5_SCORE_PER_LEVEL_1_HANZI)
                         }
+
                         else -> {
                             score += maybeSetAsPending(BIG5_SCORE_PER_OTHER_HANZI)
                         }
@@ -1476,9 +1547,11 @@ internal class Big5Candidate(
                             }
                             score += CJ_PUNCTUATION
                         }
+
                         in 0..0x7F -> {
                             pendingScore = null
                         }
+
                         else -> {
                             val pending = pendingScore
                             if (pending != null) {
@@ -1510,6 +1583,7 @@ internal class Big5Candidate(
             }
             when (result) {
                 is DecoderResult.InputEmpty -> {}
+
                 is DecoderResult.Malformed -> {
                     val malformedLen = result.length.toInt()
                     if (prevByte in 0x81..0xFE &&
@@ -1546,7 +1620,10 @@ internal class Big5Candidate(
                         return null
                     }
                 }
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
             prevByte = b
         }
@@ -1554,8 +1631,14 @@ internal class Big5Candidate(
             val (result, _, _) = decoder.decodeToUtf16Raw(ByteArray(0), dst, true)
             when (result) {
                 is DecoderResult.InputEmpty -> {}
-                is DecoderResult.Malformed -> return null
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.Malformed -> {
+                    return null
+                }
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
         }
         return score
@@ -1597,6 +1680,7 @@ internal class EucKrCandidate(
                         LatinKorean.Hangul, LatinKorean.Hanja -> {
                             score += CJK_LATIN_ADJACENCY_PENALTY
                         }
+
                         else -> {}
                     }
                     prev = LatinKorean.AsciiLetter
@@ -1632,9 +1716,11 @@ internal class EucKrCandidate(
                         LatinKorean.AsciiLetter -> {
                             score += CJK_LATIN_ADJACENCY_PENALTY
                         }
+
                         LatinKorean.Hangul -> {
                             score += EUC_KR_HANJA_AFTER_HANGUL_PENALTY
                         }
+
                         else -> {}
                     }
                     prev = LatinKorean.Hanja
@@ -1659,6 +1745,7 @@ internal class EucKrCandidate(
             }
             when (result) {
                 is DecoderResult.InputEmpty -> {}
+
                 is DecoderResult.Malformed -> {
                     val malformedLen = result.length.toInt()
                     if ((prevByte == 0xC9 || prevByte == 0xFE) && b in 0xA1..0xFE) {
@@ -1672,9 +1759,11 @@ internal class EucKrCandidate(
                             LatinKorean.AsciiLetter -> {
                                 score += CJK_LATIN_ADJACENCY_PENALTY
                             }
+
                             LatinKorean.Hangul -> {
                                 score += EUC_KR_HANJA_AFTER_HANGUL_PENALTY
                             }
+
                             else -> {}
                         }
                         prev = LatinKorean.Hanja
@@ -1714,7 +1803,10 @@ internal class EucKrCandidate(
                         return null
                     }
                 }
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
             prevWasEucRange = inEucRange
             prevByte = b
@@ -1723,8 +1815,14 @@ internal class EucKrCandidate(
             val (result, _, _) = decoder.decodeToUtf16Raw(ByteArray(0), dst, true)
             when (result) {
                 is DecoderResult.InputEmpty -> {}
-                is DecoderResult.Malformed -> return null
-                is DecoderResult.OutputFull -> error("unreachable")
+
+                is DecoderResult.Malformed -> {
+                    return null
+                }
+
+                is DecoderResult.OutputFull -> {
+                    error("unreachable")
+                }
             }
         }
         return score
@@ -1800,6 +1898,7 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
+
             is NonLatinCased -> {
                 val newScore = candidate.feed(buffer)
                 if (newScore != null) {
@@ -1813,6 +1912,7 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
+
             is Caseless -> {
                 val newScore = candidate.feed(buffer)
                 if (newScore != null) {
@@ -1826,6 +1926,7 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
+
             is ArabicFrench -> {
                 val newScore = candidate.feed(buffer)
                 if (newScore != null) {
@@ -1839,6 +1940,7 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
+
             is Logical -> {
                 val newScore = candidate.feed(buffer)
                 if (newScore != null) {
@@ -1852,6 +1954,7 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
+
             is Visual -> {
                 val newScore = candidate.feed(buffer)
                 if (newScore != null) {
@@ -1865,77 +1968,183 @@ internal sealed class InnerCandidate {
                     null
                 }
             }
-            is Utf8 -> candidate.feed(buffer, last)
-            is Iso2022 -> candidate.feed(buffer, last)
-            is Shift -> candidate.feed(buffer, last)
-            is EucJp -> candidate.feed(buffer, last)
-            is EucKr -> candidate.feed(buffer, last)
-            is Big5 -> candidate.feed(buffer, last)
-            is Gbk -> candidate.feed(buffer, last)
+
+            is Utf8 -> {
+                candidate.feed(buffer, last)
+            }
+
+            is Iso2022 -> {
+                candidate.feed(buffer, last)
+            }
+
+            is Shift -> {
+                candidate.feed(buffer, last)
+            }
+
+            is EucJp -> {
+                candidate.feed(buffer, last)
+            }
+
+            is EucKr -> {
+                candidate.feed(buffer, last)
+            }
+
+            is Big5 -> {
+                candidate.feed(buffer, last)
+            }
+
+            is Gbk -> {
+                candidate.feed(buffer, last)
+            }
         }
     }
 }
 
 internal fun encodingForTld(tld: Tld): Int =
     when (tld) {
-        Tld.CentralWindows, Tld.CentralCyrillic -> EncodingDetector.CENTRAL_WINDOWS_INDEX
-        Tld.Cyrillic -> EncodingDetector.CYRILLIC_WINDOWS_INDEX
-        Tld.Generic, Tld.Western, Tld.WesternCyrillic, Tld.WesternArabic, Tld.Eu ->
+        Tld.CentralWindows, Tld.CentralCyrillic -> {
+            EncodingDetector.CENTRAL_WINDOWS_INDEX
+        }
+
+        Tld.Cyrillic -> {
+            EncodingDetector.CYRILLIC_WINDOWS_INDEX
+        }
+
+        Tld.Generic, Tld.Western, Tld.WesternCyrillic, Tld.WesternArabic, Tld.Eu -> {
             EncodingDetector.WESTERN_INDEX
-        Tld.IcelandicFaroese -> EncodingDetector.ICELANDIC_INDEX
-        Tld.Greek -> EncodingDetector.GREEK_ISO_INDEX
-        Tld.TurkishAzeri -> EncodingDetector.TURKISH_INDEX
-        Tld.Hebrew -> EncodingDetector.LOGICAL_INDEX
-        Tld.Arabic -> EncodingDetector.ARABIC_WINDOWS_INDEX
-        Tld.Baltic -> EncodingDetector.BALTIC_WINDOWS_INDEX
-        Tld.Vietnamese -> EncodingDetector.VIETNAMESE_INDEX
-        Tld.Thai -> EncodingDetector.THAI_INDEX
-        Tld.Simplified, Tld.SimplifiedTraditional -> EncodingDetector.GBK_INDEX
-        Tld.Traditional, Tld.TraditionalSimplified -> EncodingDetector.BIG5_INDEX
-        Tld.Japanese -> EncodingDetector.SHIFT_JIS_INDEX
-        Tld.Korean -> EncodingDetector.EUC_KR_INDEX
-        Tld.CentralIso -> EncodingDetector.CENTRAL_ISO_INDEX
+        }
+
+        Tld.IcelandicFaroese -> {
+            EncodingDetector.ICELANDIC_INDEX
+        }
+
+        Tld.Greek -> {
+            EncodingDetector.GREEK_ISO_INDEX
+        }
+
+        Tld.TurkishAzeri -> {
+            EncodingDetector.TURKISH_INDEX
+        }
+
+        Tld.Hebrew -> {
+            EncodingDetector.LOGICAL_INDEX
+        }
+
+        Tld.Arabic -> {
+            EncodingDetector.ARABIC_WINDOWS_INDEX
+        }
+
+        Tld.Baltic -> {
+            EncodingDetector.BALTIC_WINDOWS_INDEX
+        }
+
+        Tld.Vietnamese -> {
+            EncodingDetector.VIETNAMESE_INDEX
+        }
+
+        Tld.Thai -> {
+            EncodingDetector.THAI_INDEX
+        }
+
+        Tld.Simplified, Tld.SimplifiedTraditional -> {
+            EncodingDetector.GBK_INDEX
+        }
+
+        Tld.Traditional, Tld.TraditionalSimplified -> {
+            EncodingDetector.BIG5_INDEX
+        }
+
+        Tld.Japanese -> {
+            EncodingDetector.SHIFT_JIS_INDEX
+        }
+
+        Tld.Korean -> {
+            EncodingDetector.EUC_KR_INDEX
+        }
+
+        Tld.CentralIso -> {
+            EncodingDetector.CENTRAL_ISO_INDEX
+        }
     }
 
 internal fun encodingIsNativeToTld(tld: Tld, encoding: Int): Boolean =
     when (tld) {
-        Tld.CentralWindows -> encoding == EncodingDetector.CENTRAL_WINDOWS_INDEX
+        Tld.CentralWindows -> {
+            encoding == EncodingDetector.CENTRAL_WINDOWS_INDEX
+        }
+
         Tld.Cyrillic -> {
             encoding == EncodingDetector.CYRILLIC_WINDOWS_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_KOI_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_IBM_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_ISO_INDEX
         }
-        Tld.Western -> encoding == EncodingDetector.WESTERN_INDEX
+
+        Tld.Western -> {
+            encoding == EncodingDetector.WESTERN_INDEX
+        }
+
         Tld.Greek -> {
             encoding == EncodingDetector.GREEK_WINDOWS_INDEX ||
                 encoding == EncodingDetector.GREEK_ISO_INDEX
         }
-        Tld.TurkishAzeri -> encoding == EncodingDetector.TURKISH_INDEX
-        Tld.Hebrew -> encoding == EncodingDetector.LOGICAL_INDEX
+
+        Tld.TurkishAzeri -> {
+            encoding == EncodingDetector.TURKISH_INDEX
+        }
+
+        Tld.Hebrew -> {
+            encoding == EncodingDetector.LOGICAL_INDEX
+        }
+
         Tld.Arabic -> {
             encoding == EncodingDetector.ARABIC_WINDOWS_INDEX ||
                 encoding == EncodingDetector.ARABIC_ISO_INDEX
         }
+
         Tld.Baltic -> {
             encoding == EncodingDetector.BALTIC_WINDOWS_INDEX ||
                 encoding == EncodingDetector.BALTIC_ISO13_INDEX ||
                 encoding == EncodingDetector.BALTIC_ISO4_INDEX
         }
-        Tld.Vietnamese -> encoding == EncodingDetector.VIETNAMESE_INDEX
-        Tld.Thai -> encoding == EncodingDetector.THAI_INDEX
-        Tld.Simplified -> encoding == EncodingDetector.GBK_INDEX
-        Tld.Traditional -> encoding == EncodingDetector.BIG5_INDEX
+
+        Tld.Vietnamese -> {
+            encoding == EncodingDetector.VIETNAMESE_INDEX
+        }
+
+        Tld.Thai -> {
+            encoding == EncodingDetector.THAI_INDEX
+        }
+
+        Tld.Simplified -> {
+            encoding == EncodingDetector.GBK_INDEX
+        }
+
+        Tld.Traditional -> {
+            encoding == EncodingDetector.BIG5_INDEX
+        }
+
         Tld.Japanese -> {
             encoding == EncodingDetector.SHIFT_JIS_INDEX ||
                 encoding == EncodingDetector.EUC_JP_INDEX
         }
-        Tld.Korean -> encoding == EncodingDetector.EUC_KR_INDEX
+
+        Tld.Korean -> {
+            encoding == EncodingDetector.EUC_KR_INDEX
+        }
+
         Tld.SimplifiedTraditional, Tld.TraditionalSimplified -> {
             encoding == EncodingDetector.GBK_INDEX || encoding == EncodingDetector.BIG5_INDEX
         }
-        Tld.CentralIso -> encoding == EncodingDetector.CENTRAL_ISO_INDEX
-        Tld.IcelandicFaroese -> encoding == EncodingDetector.ICELANDIC_INDEX
+
+        Tld.CentralIso -> {
+            encoding == EncodingDetector.CENTRAL_ISO_INDEX
+        }
+
+        Tld.IcelandicFaroese -> {
+            encoding == EncodingDetector.ICELANDIC_INDEX
+        }
+
         Tld.WesternCyrillic -> {
             encoding == EncodingDetector.WESTERN_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_WINDOWS_INDEX ||
@@ -1943,6 +2152,7 @@ internal fun encodingIsNativeToTld(tld: Tld, encoding: Int): Boolean =
                 encoding == EncodingDetector.CYRILLIC_IBM_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_ISO_INDEX
         }
+
         Tld.CentralCyrillic -> {
             encoding == EncodingDetector.CENTRAL_WINDOWS_INDEX ||
                 encoding == EncodingDetector.CENTRAL_ISO_INDEX ||
@@ -1951,11 +2161,13 @@ internal fun encodingIsNativeToTld(tld: Tld, encoding: Int): Boolean =
                 encoding == EncodingDetector.CYRILLIC_IBM_INDEX ||
                 encoding == EncodingDetector.CYRILLIC_ISO_INDEX
         }
+
         Tld.WesternArabic -> {
             encoding == EncodingDetector.WESTERN_INDEX ||
                 encoding == EncodingDetector.ARABIC_WINDOWS_INDEX ||
                 encoding == EncodingDetector.ARABIC_ISO_INDEX
         }
+
         Tld.Eu -> {
             encoding == EncodingDetector.WESTERN_INDEX ||
                 encoding == EncodingDetector.ICELANDIC_INDEX ||
@@ -1971,7 +2183,10 @@ internal fun encodingIsNativeToTld(tld: Tld, encoding: Int): Boolean =
                 encoding == EncodingDetector.BALTIC_ISO13_INDEX ||
                 encoding == EncodingDetector.BALTIC_ISO4_INDEX
         }
-        Tld.Generic -> false
+
+        Tld.Generic -> {
+            false
+        }
     }
 
 internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
@@ -1980,7 +2195,10 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
     }
     val (divisor, constant) =
         when (tld) {
-            Tld.Generic -> error("unreachable")
+            Tld.Generic -> {
+                error("unreachable")
+            }
+
             Tld.CentralWindows, Tld.CentralIso -> {
                 when (encoding) {
                     EncodingDetector.WESTERN_INDEX,
@@ -1991,9 +2209,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.VIETNAMESE_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Cyrillic -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2010,9 +2230,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.BALTIC_ISO13_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Western, Tld.WesternCyrillic, Tld.WesternArabic -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2023,9 +2245,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.TURKISH_INDEX,
                     EncodingDetector.VIETNAMESE_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Greek -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2044,9 +2268,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.BALTIC_ISO13_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.TurkishAzeri -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2057,9 +2283,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.VIETNAMESE_INDEX,
                     EncodingDetector.ICELANDIC_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Hebrew -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2076,9 +2304,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.VIETNAMESE_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Arabic -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2101,9 +2331,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.VIETNAMESE_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Baltic -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2112,9 +2344,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.TURKISH_INDEX,
                     EncodingDetector.VIETNAMESE_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Vietnamese -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2125,9 +2359,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.TURKISH_INDEX,
                     EncodingDetector.ICELANDIC_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Thai -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2152,16 +2388,21 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.BALTIC_ISO13_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Simplified,
             Tld.Traditional,
             Tld.TraditionalSimplified,
             Tld.SimplifiedTraditional,
             Tld.Japanese,
             Tld.Korean,
-            -> return score
+            -> {
+                return score
+            }
+
             Tld.IcelandicFaroese -> {
                 when (encoding) {
                     EncodingDetector.CENTRAL_WINDOWS_INDEX,
@@ -2172,9 +2413,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.TURKISH_INDEX,
                     EncodingDetector.VIETNAMESE_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.CentralCyrillic -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2189,9 +2432,11 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.BALTIC_ISO13_INDEX,
                     EncodingDetector.TURKISH_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
+
             Tld.Eu -> {
                 when (encoding) {
                     EncodingDetector.BIG5_INDEX,
@@ -2200,6 +2445,7 @@ internal fun scoreAdjustment(score: Long, encoding: Int, tld: Tld): Long {
                     EncodingDetector.TURKISH_INDEX,
                     EncodingDetector.VIETNAMESE_INDEX,
                     -> return score
+
                     else -> Pair(50L, 60L)
                 }
             }
@@ -2232,26 +2478,31 @@ internal class Candidate(
                     return null
                 }
             }
+
             is InnerCandidate.Caseless -> {
                 if (inC.candidate.longestWord < 2L && !encodingIsNativeToTld(tld, encoding)) {
                     return null
                 }
             }
+
             is InnerCandidate.ArabicFrench -> {
                 if (inC.candidate.longestWord < 2L && !encodingIsNativeToTld(tld, encoding)) {
                     return null
                 }
             }
+
             is InnerCandidate.Logical -> {
                 if (inC.candidate.longestWord < 2L && !encodingIsNativeToTld(tld, encoding)) {
                     return null
                 }
             }
+
             is InnerCandidate.Visual -> {
                 if (inC.candidate.longestWord < 2L && !encodingIsNativeToTld(tld, encoding)) {
                     return null
                 }
             }
+
             else -> {}
         }
         if (tld == Tld.Generic) {
@@ -2597,24 +2848,28 @@ public class EncodingDetector internal constructor(
                         expectationIsValid = true
                     }
                 }
+
                 Tld.Traditional -> {
                     if (candidates[GBK_INDEX].score != null) {
                         tldType = Tld.Simplified
                         expectationIsValid = true
                     }
                 }
+
                 Tld.CentralWindows -> {
                     if (candidates[CENTRAL_ISO_INDEX].score != null) {
                         tldType = Tld.CentralIso
                         expectationIsValid = true
                     }
                 }
+
                 Tld.CentralIso -> {
                     if (candidates[CENTRAL_WINDOWS_INDEX].score != null) {
                         tldType = Tld.CentralWindows
                         expectationIsValid = true
                     }
                 }
+
                 else -> {}
             }
         }
@@ -2660,24 +2915,28 @@ public class EncodingDetector internal constructor(
                         expectationIsValid = true
                     }
                 }
+
                 Tld.Traditional -> {
                     if (candidates[GBK_INDEX].score != null) {
                         tldType = Tld.Simplified
                         expectationIsValid = true
                     }
                 }
+
                 Tld.CentralWindows -> {
                     if (candidates[CENTRAL_ISO_INDEX].score != null) {
                         tldType = Tld.CentralIso
                         expectationIsValid = true
                     }
                 }
+
                 Tld.CentralIso -> {
                     if (candidates[CENTRAL_WINDOWS_INDEX].score != null) {
                         tldType = Tld.CentralWindows
                         expectationIsValid = true
                     }
                 }
+
                 else -> {}
             }
         }

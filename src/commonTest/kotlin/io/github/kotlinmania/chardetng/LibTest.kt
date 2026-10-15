@@ -500,7 +500,7 @@ class LibTest {
     @Test
     fun testBig5Pua() {
         val v = mutableListOf<Byte>()
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xA4.toByte())
             v.add(0x40.toByte())
         }
@@ -514,7 +514,7 @@ class LibTest {
     @Test
     fun testBig5SingleByteA0() {
         val v = mutableListOf<Byte>()
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0x40.toByte())
         }
@@ -528,7 +528,7 @@ class LibTest {
     @Test
     fun testBig5SingleByteFf() {
         val v = mutableListOf<Byte>()
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0x40.toByte())
         }
@@ -542,7 +542,7 @@ class LibTest {
     @Test
     fun testNotBig5() {
         val v = mutableListOf<Byte>()
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xA4.toByte())
             v.add(0x40.toByte())
         }
@@ -561,7 +561,7 @@ class LibTest {
         v.add(0xB0.toByte())
         v.add(0xA1.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -582,7 +582,7 @@ class LibTest {
         v.add(0xB0.toByte())
         v.add(0xA1.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -600,7 +600,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xFF.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -618,7 +618,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0x81.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -636,7 +636,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0x84.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -657,7 +657,7 @@ class LibTest {
         v.add(0xB0.toByte())
         v.add(0xA1.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0xC5.toByte())
             v.add(0xD7.toByte())
             v.add(0xBD.toByte())
@@ -675,7 +675,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0x87.toByte())
         v.add(0xE5.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0x82.toByte())
             v.add(0xC9.toByte())
             v.add(0x82.toByte())
@@ -692,7 +692,7 @@ class LibTest {
     fun testShiftJisSingleByteFd() {
         val v = mutableListOf<Byte>()
         v.add(0xFD.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0x82.toByte())
             v.add(0xC9.toByte())
             v.add(0x82.toByte())
@@ -710,7 +710,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0x84.toByte())
         v.add(0xE0.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0x82.toByte())
             v.add(0xC9.toByte())
             v.add(0x82.toByte())
@@ -728,7 +728,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0x87.toByte())
         v.add(0x7D.toByte())
-        for (i in 0 until 40) {
+        repeat(40) {
             v.add(0x82.toByte())
             v.add(0xC9.toByte())
             v.add(0x82.toByte())
@@ -746,7 +746,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xAD.toByte())
         v.add(0xBF.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0xCB.toByte())
             v.add(0xA4.toByte())
@@ -765,7 +765,7 @@ class LibTest {
         v.add(0x8F.toByte())
         v.add(0xFE.toByte())
         v.add(0xF6.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0xCB.toByte())
             v.add(0xA4.toByte())
@@ -784,7 +784,7 @@ class LibTest {
         v.add(0x8F.toByte())
         v.add(0xFE.toByte())
         v.add(0xF7.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0xCB.toByte())
             v.add(0xA4.toByte())
@@ -802,7 +802,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xA8.toByte())
         v.add(0xDF.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xA4.toByte())
             v.add(0xCB.toByte())
             v.add(0xA4.toByte())
@@ -819,7 +819,7 @@ class LibTest {
     fun testGbkSingleByteFf() {
         val v = mutableListOf<Byte>()
         v.add(0xFF.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xB5.toByte())
             v.add(0xC4.toByte())
         }
@@ -831,7 +831,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xA0.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xB5.toByte())
             v.add(0xC4.toByte())
         }
@@ -843,7 +843,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xFE.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xB5.toByte())
             v.add(0xC4.toByte())
         }
@@ -855,7 +855,7 @@ class LibTest {
         val v = mutableListOf<Byte>()
         v.add(0xFC.toByte())
         v.add(' '.code.toByte())
-        for (i in 0 until 80) {
+        repeat(80) {
             v.add(0xB5.toByte())
             v.add(0xC4.toByte())
         }
