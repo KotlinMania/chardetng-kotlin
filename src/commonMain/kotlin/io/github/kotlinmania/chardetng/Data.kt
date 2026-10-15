@@ -196,10 +196,22 @@ public class SingleByteData(
                 } else {
                     val previousUnstored = previousUsize - storedBoundary
                     return when (previousUnstored) {
-                        PLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> 0L
-                        IMPLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> IMPLAUSIBILITY_PENALTY
-                        IMPLAUSIBLE_BEFORE_ALPHABETIC -> IMPLAUSIBILITY_PENALTY
-                        IMPLAUSIBLE_AFTER_ALPHABETIC -> 0L
+                        PLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> {
+                            0L
+                        }
+
+                        IMPLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> {
+                            IMPLAUSIBILITY_PENALTY
+                        }
+
+                        IMPLAUSIBLE_BEFORE_ALPHABETIC -> {
+                            IMPLAUSIBILITY_PENALTY
+                        }
+
+                        IMPLAUSIBLE_AFTER_ALPHABETIC -> {
+                            0L
+                        }
+
                         PLAUSIBLE_NEXT_TO_NON_ASCII_ALPHABETIC_ON_EITHER_SIDE -> {
                             if (currentUsize < ascii) {
                                 IMPLAUSIBILITY_PENALTY
@@ -207,6 +219,7 @@ public class SingleByteData(
                                 0L
                             }
                         }
+
                         PLAUSIBLE_NEXT_TO_ASCII_ALPHABETIC_ON_EITHER_SIDE -> {
                             if (currentUsize < ascii) {
                                 0L
@@ -214,7 +227,10 @@ public class SingleByteData(
                                 IMPLAUSIBILITY_PENALTY
                             }
                         }
-                        else -> 0L
+
+                        else -> {
+                            0L
+                        }
                     }
                 }
             }
@@ -228,10 +244,22 @@ public class SingleByteData(
                 } else {
                     val currentUnstored = currentUsize - storedBoundary
                     return when (currentUnstored) {
-                        PLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> 0L
-                        IMPLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> IMPLAUSIBILITY_PENALTY
-                        IMPLAUSIBLE_BEFORE_ALPHABETIC -> 0L
-                        IMPLAUSIBLE_AFTER_ALPHABETIC -> IMPLAUSIBILITY_PENALTY
+                        PLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> {
+                            0L
+                        }
+
+                        IMPLAUSIBLE_NEXT_TO_ALPHABETIC_ON_EITHER_SIDE -> {
+                            IMPLAUSIBILITY_PENALTY
+                        }
+
+                        IMPLAUSIBLE_BEFORE_ALPHABETIC -> {
+                            0L
+                        }
+
+                        IMPLAUSIBLE_AFTER_ALPHABETIC -> {
+                            IMPLAUSIBILITY_PENALTY
+                        }
+
                         PLAUSIBLE_NEXT_TO_NON_ASCII_ALPHABETIC_ON_EITHER_SIDE -> {
                             if (previousUsize < ascii) {
                                 IMPLAUSIBILITY_PENALTY
@@ -239,6 +267,7 @@ public class SingleByteData(
                                 0L
                             }
                         }
+
                         PLAUSIBLE_NEXT_TO_ASCII_ALPHABETIC_ON_EITHER_SIDE -> {
                             if (previousUsize < ascii) {
                                 0L
@@ -246,7 +275,10 @@ public class SingleByteData(
                                 IMPLAUSIBILITY_PENALTY
                             }
                         }
-                        else -> 0L
+
+                        else -> {
+                            0L
+                        }
                     }
                 }
             } else if (currentUsize == ASCII_DIGIT || previousUsize == ASCII_DIGIT) {
