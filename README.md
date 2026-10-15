@@ -20,7 +20,7 @@ This is an **in-progress port**. The goal is feature parity with the upstream Ru
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:chardetng-kotlin:0.1.0")
+    implementation("io.github.kotlinmania:chardetng-kotlin:0.2.0")
 }
 ```
 
@@ -33,13 +33,30 @@ dependencies {
 
 ### Targets
 
+- JVM (Java 21+)
+- Android (API 24+) and Android Native arm64 / x64
 - macOS arm64
-- Linux x64
+- Linux arm64 / x64
 - Windows mingw-x64
-- iOS arm64 / simulator-arm64 (Swift export + XCFramework)
+- iOS arm64 / simulator-arm64
+- tvOS arm64 / simulator-arm64
+- watchOS device-arm64 / simulator-arm64
 - JS (browser + Node.js)
-- Wasm-JS (browser + Node.js)
-- Android (API 24+)
+- Wasm-JS (browser + Node.js) and Wasm-WASI (Node.js)
+
+### 0.2.0 compatibility and release notes
+
+This pre-1.0 minor release publishes the current detector implementation with
+`io.github.kotlinmania:encoding-rs-kotlin:0.1.2` from Maven Central. It no longer
+requires a locally published encoding-rs dependency.
+
+- Built with Kotlin 2.4.20, language/API level 2.4, and JVM target 21.
+- Retains the 17 targets listed above. Compared with published 0.1.0,
+  `androidNativeArm32`, `androidNativeX86`, `iosX64`, `watchosArm32`, and
+  `watchosArm64` (arm64_32) artifacts are no longer produced.
+- Updates the Gradle, lint, JavaScript dependency, and Swift export build setup.
+  Generated Swift packages and the macOS Swift test harness target macOS 15.
+- Aligns published license metadata with this repository's Apache-2.0 `LICENSE`.
 
 ### Porting guidelines
 
