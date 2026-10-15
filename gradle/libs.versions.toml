@@ -26,7 +26,7 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "collectionsImmutable" }
 kotlinx-benchmark-runtime = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "kotlinxBenchmark" }
 
-encoding-rs = { module = "io.github.kotlinmania:encoding-rs-kotlin", version = "0.1.1" }
+encoding-rs = { module = "io.github.kotlinmania:encoding-rs-kotlin", version = "0.1.2" }
 
 [bundles]
 chardetng-commonMain = [

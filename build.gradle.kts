@@ -410,10 +410,7 @@ kotlin {
         configureBenchmarkCompilation()
         addToXcf()
     }
-    watchosArm64 {
-        configureBenchmarkCompilation()
-        addToXcf()
-    }
+    // watchosArm64 (WatchOS 32 / arm64_32): retired by workspace policy (§5.5.1). WatchOS 32 is not supported.
     watchosDeviceArm64 {
         configureBenchmarkCompilation()
         addToXcf()
@@ -421,13 +418,6 @@ kotlin {
     watchosSimulatorArm64 {
         configureBenchmarkCompilation()
         addToXcf()
-    }
-
-    // iosX64: Intel Mac simulator. Tier 3 in Kotlin/Native but NOT deprecated —
-    // Apple still ships x86_64 iOS simulator runtimes, so it is always built.
-    iosX64 {
-        configureBenchmarkCompilation()
-        addToXcf(static = true)
     }
 
     // Other native — Tier 1/2
@@ -1017,14 +1007,12 @@ val nativeTargetNames =
         "androidNativeX64",
         "iosArm64",
         "iosSimulatorArm64",
-        "iosX64",
         "linuxArm64",
         "linuxX64",
         "macosArm64",
         "mingwX64",
         "tvosArm64",
         "tvosSimulatorArm64",
-        "watchosArm64",
         "watchosDeviceArm64",
         "watchosSimulatorArm64",
     )
