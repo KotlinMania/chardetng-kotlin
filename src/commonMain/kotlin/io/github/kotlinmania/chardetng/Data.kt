@@ -289,7 +289,9 @@ public class SingleByteData(
         }
     }
 
-    override fun equals(other: Any?): Boolean = this === other
+    public fun eq(other: SingleByteData): Boolean = this === other
+
+    override fun equals(other: Any?): Boolean = other is SingleByteData && eq(other)
 
     override fun hashCode(): Int = super.hashCode()
 }
