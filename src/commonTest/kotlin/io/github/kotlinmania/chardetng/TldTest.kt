@@ -1,4 +1,3 @@
-// port-lint: ignore
 // Tests for Tld.kt — verifies the binary-search lookup matches the expected
 // classifications hard-coded in tld.rs.
 package io.github.kotlinmania.chardetng
